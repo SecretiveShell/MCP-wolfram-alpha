@@ -49,6 +49,51 @@ This was tested with the full results API, but it might not be required.
 }
 ```
 
+## Docker Usage
+
+### Using Pre-built Image
+
+Pull the latest image from GitHub Container Registry:
+
+```bash
+docker pull ghcr.io/secretiveshell/mcp-wolfram-alpha:latest
+```
+
+Run the container with your API key:
+
+```bash
+docker run --rm -e WOLFRAM_API_KEY="your-app-id" ghcr.io/secretiveshell/mcp-wolfram-alpha:latest
+```
+
+### Using Docker with MCP
+
+You can use the Docker image in your MCP configuration:
+
+```json
+{
+    "mcpServers": {
+        "MCP-wolfram-alpha": {
+            "command": "docker",
+            "args": [
+                "run",
+                "--rm",
+                "-i",
+                "--env",
+                "WOLFRAM_API_KEY=your-app-id",
+                "ghcr.io/secretiveshell/mcp-wolfram-alpha:latest"
+            ]
+        }
+    }
+}
+```
+
+### Building Locally
+
+```bash
+docker build -t mcp-wolfram-alpha .
+docker run --rm -e WOLFRAM_API_KEY="your-app-id" mcp-wolfram-alpha
+```
+
 ## Development
 
 ### Debugging

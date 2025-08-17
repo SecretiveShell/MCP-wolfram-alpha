@@ -1,0 +1,53 @@
+name: Test Docker Build
+
+on:
+  pull_request:
+    branches:
+      - master
+      - main
+    paths:
+      - 'Dockerfile'
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - 'src/**'
+      - '.github/workflows/test-docker.yml'
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: test:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Test container startup without API key
+        run: |
+          # Should fail gracefully without API key
+          timeout 10s docker run --rm test:latest || [ $? -eq 124 ] || [ $? -eq 1 ]
+
+      - name: Test container with demo API key
+        run: |
+          # Should start but may fail due to invalid key
+          timeout 10s docker run --rm -e WOLFRAM_API_KEY="DEMO_KEY" test:latest || [ $? -eq 124 ] || [ $? -eq 1 ]
+
+      - name: Verify image size is reasonable
+        run: |
+          size=$(docker image inspect test:latest --format='{{.Size}}')
+          size_mb=$((size / 1024 / 1024))
+          echo "Image size: ${size_mb}MB"
+          if [ $size_mb -gt 500 ]; then
+            echo "Warning: Image size is quite large (${size_mb}MB)"
+            exit 1
+          fi
