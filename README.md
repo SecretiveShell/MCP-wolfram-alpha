@@ -2,6 +2,7 @@
 
 A MCP server to connect to wolfram alpha API.
 
+[![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/SecretiveShell/MCP-wolfram-alpha)](https://archestra.ai/mcp-catalog/secretiveshell__mcp-wolfram-alpha)
 <a href="https://glama.ai/mcp/servers/q5fud9cttp">
   <img width="380" height="200" src="https://glama.ai/mcp/servers/q5fud9cttp/badge" />
 </a>

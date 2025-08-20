@@ -1,0 +1,21 @@
+[project]
+name = "mcp-wolfram-alpha"
+version = "0.2.1"
+description = "A MCP server to connect to wolfram alpha API."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+ "httpx>=0.28.1",
+ "mcp>=1.2.0",
+ "wolframalpha>=5.1.3",
+]
+[[project.authors]]
+name = "TerminalMan"
+email = "84923604+SecretiveShell@users.noreply.github.com"
+
+[build-system]
+requires = [ "hatchling",]
+build-backend = "hatchling.build"
+
+[project.scripts]
+mcp-wolfram-alpha = "mcp_wolfram_alpha:main"

@@ -1,0 +1,26 @@
+startCommand:
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    {
+      "type": "object",
+      "properties": {
+        "WOLFRAM_API_KEY": {
+          "type": "string",
+          "description": "The API key for accessing Wolfram Alpha services."
+        }
+      },
+      "required": ["WOLFRAM_API_KEY"]
+    }
+  commandFunction:
+    # A function that produces the CLI command to start the MCP on stdio.
+    |-
+    (config) => ({
+      "command": "uvx",
+      "args": [
+        "mcp-wolfram-alpha"
+      ],
+      "env": {
+        "WOLFRAM_API_KEY": config.WOLFRAM_API_KEY
+      }
+    })

@@ -1,0 +1,16 @@
+{
+    "mcpServers": {
+        "MCP-wolfram-alpha": {
+            "command": "uv",
+            "args": [
+                "--directory",
+                "DIRECTORY TO THIS PROJECT",
+                "run",
+                "MCP-wolfram-alpha"
+            ],
+            "env": {
+                "WOLFRAM_API_KEY": "YOUR KEY HERE"
+            }
+        }
+    }
+}
