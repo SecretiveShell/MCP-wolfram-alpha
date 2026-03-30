@@ -81,3 +81,8 @@ Then run:
 ```bash
 npx @wong2/mcp-cli -c .\config.json
 ```
+
+## Hosted deployment
+
+A hosted deployment is available on [Fronteir AI](https://fronteir.ai/mcp/secretiveshell-mcp-wolfram-alpha).
+
